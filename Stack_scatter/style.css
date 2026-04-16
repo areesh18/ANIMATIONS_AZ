@@ -13,6 +13,10 @@ img{
 }
 h1{
     font-weight: 300;
+    font-size: 40px;
+}
+.intro h1, .outro h1{
+    font-size: 60px;
 }
 section{
     position: relative;
