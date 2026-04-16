@@ -1,0 +1,106 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Boldonse";
+}
+section.contact-me {
+  background-color: #fafaf0;
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.contact-me-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 6;
+  will-change: transform;
+}
+section.contact-me::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(circle at center, black 40%, transparent 95%);
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.035) 1px, transparent 1px);
+
+  background-size: 60px 60px;
+
+  mask-image: radial-gradient(circle at center, black 35%, transparent 90%);
+  -webkit-mask-image: radial-gradient(
+    circle at center,
+    black 35%,
+    transparent 90%
+  );
+  z-index: 1;
+}
+.ft-headline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rem;
+  position: relative;
+  z-index: 50;
+}
+.mail-me {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.ft-headline h1 {
+  font-family: "bebas Neue";
+  font-size: clamp(5rem, 12vw, 9rem);
+
+  font-weight: 600;
+  text-align: center;
+  line-height: 1;
+  letter-spacing: 1px;
+}
+.mail-me p {
+  text-transform: uppercase;
+}
+.mail-me a {
+  text-decoration: none;
+  font-family: "playfair display";
+  font-style: italic;
+  font-size: 2rem;
+  font-weight: 500;
+}
+.rectangle.social-right {
+  left: auto !important;
+  right: 0px;
+  border-radius: 10px 0px 0px 10px;
+}
+@media (max-width: 768px) {
+  section.contact-me {
+    background-color: #fafaf0;
+    height: 80vh;
+    width: 100%;
+    position: relative;
+  }
+  .social-right {
+    display: none;
+  }
+}
+.trail-img {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.15));
+  z-index: 5;
+  will-change: transform, opacity;
+}

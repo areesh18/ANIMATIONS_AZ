@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Education & Achievements</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap");
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-card: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent-1: #00ff88;
+            --accent-2: #0088ff;
+            --accent-3: #ff0088;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        h1 {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: clamp(1.25rem, 2.5vw, 2rem);
+            font-weight: 600;
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+        }
+
+        p {
+            font-size: clamp(0.875rem, 1.5vw, 1.125rem);
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            overflow: hidden;
+            background: radial-gradient(ellipse at 50% 50%, rgba(102, 126, 234, 0.15) 0%, transparent 50%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0px, transparent 1px, transparent 40px),
+                repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0px, transparent 1px, transparent 40px);
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            max-width: 1200px;
+            text-align: center;
+            z-index: 1;
+            background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        /* Spotlight Section */
+        .spotlight {
+            position: relative;
+            width: 100%;
+            padding: 4rem 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: clamp(8rem, 15vw, 15rem);
+        }
+
+        .spotlight .row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .spotlight .row:nth-child(2) { animation-delay: 0.1s; }
+        .spotlight .row:nth-child(3) { animation-delay: 0.2s; }
+        .spotlight .row:nth-child(4) { animation-delay: 0.3s; }
+        .spotlight .row:nth-child(5) { animation-delay: 0.4s; }
+        .spotlight .row:nth-child(6) { animation-delay: 0.5s; }
+        .spotlight .row:nth-child(7) { animation-delay: 0.6s; }
+
+        .spotlight .row .col {
+            flex: 1;
+            max-width: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .spotlight .row:nth-child(1) .img,
+        .spotlight .row:nth-child(8) .img {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        /* Modern Card Design */
+        .spotlight .card {
+            position: relative;
+            background: var(--bg-card);
+            width: 100%;
+            padding: 3rem;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        .spotlight .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-1);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .spotlight .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .spotlight .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .spotlight .card h2 {
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Modern Image Containers */
+        .placeholder-img {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(3rem, 8vw, 6rem);
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .placeholder-img::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 24px;
+            padding: 2px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.05));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+        }
+
+        .row:nth-child(1) .placeholder-img { background: var(--gradient-1); }
+        .row:nth-child(2) .placeholder-img { background: var(--gradient-2); }
+        .row:nth-child(3) .placeholder-img { background: var(--gradient-3); }
+        .row:nth-child(4) .placeholder-img { background: var(--gradient-4); }
+        .row:nth-child(5) .placeholder-img { background: var(--gradient-1); }
+        .row:nth-child(6) .placeholder-img { background: var(--gradient-2); }
+        .row:nth-child(7) .placeholder-img { background: var(--gradient-3); }
+        .row:nth-child(8) .placeholder-img { background: var(--gradient-4); }
+
+        .placeholder-img:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        /* SVG Path Animation */
+        .spotlight .svg-path {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.6;
+            filter: blur(1px);
+        }
+
+        .spotlight .svg-path svg {
+            height: auto;
+            width: 100%;
+        }
+
+        /* Outro Section */
+        .outro {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            overflow: hidden;
+            background: radial-gradient(ellipse at 50% 50%, rgba(255, 0, 136, 0.15) 0%, transparent 50%);
+        }
+
+        .outro::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0px, transparent 1px, transparent 40px),
+                repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0px, transparent 1px, transparent 40px);
+            pointer-events: none;
+        }
+
+        .outro h1 {
+            max-width: 1200px;
+            text-align: center;
+            z-index: 1;
+            background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1000px) {
+            .hero, .outro {
+                min-height: 80vh;
+            }
+
+            .spotlight {
+                gap: 5rem;
+                padding: 3rem 1rem;
+            }
+
+            .spotlight .row {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .spotlight .row .col {
+                max-width: 100%;
+            }
+
+            .spotlight .row:nth-child(1) .img,
+            .spotlight .row:nth-child(8) .img {
+                max-width: 100%;
+            }
+
+            .spotlight .card {
+                padding: 2rem;
+            }
+
+            .spotlight .svg-path {
+                top: 10vh;
+                width: 140%;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .spotlight {
+                gap: 3rem;
+            }
+
+            .spotlight .card {
+                padding: 1.5rem;
+                border-radius: 16px;
+            }
+
+            .placeholder-img {
+                border-radius: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="hero">
+            <h1>Crafting Digital Experiences Through Innovation & Expertise</h1>
+        </div>
+        <div class="spotlight">
+            <!-- First Image -->
+            <div class="row">
+                <div class="img">
+                    <div class="placeholder-img">🎓</div>
+                </div>
+            </div>
+
+            <!-- B.Tech Education -->
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <h2>B.Tech in Information Technology</h2>
+                        <p>Graduated with a strong foundation in modern technology and software development. Specialized in cutting-edge technologies and practical implementation.</p>
+                        <p style="margin-top: 1rem; color: var(--accent-1);">Techno Main Salt Lake, Kolkata | CGPA: 8.16 | 2025</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="placeholder-img">📚</div>
+                </div>
+            </div>
+
+            <!-- ISC Education -->
+            <div class="row">
+                <div class="col">
+                    <div class="placeholder-img">🎯</div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <h2>ISC (Class XII)</h2>
+                        <p>Achieved excellent academic performance with a focus on science and mathematics. Developed strong analytical and problem-solving capabilities.</p>
+                        <p style="margin-top: 1rem; color: var(--accent-2);">CISCE Board | 95.75% | 2022</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ICSE Education -->
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <h2>ICSE (Class X)</h2>
+                        <p>Built a solid academic foundation with outstanding results across all subjects. Demonstrated consistent excellence and dedication to learning.</p>
+                        <p style="margin-top: 1rem; color: var(--accent-3);">CISCE Board | 95.2% | 2020</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="placeholder-img">📖</div>
+                </div>
+            </div>
+
+            <!-- Achievement 1 -->
+            <div class="row">
+                <div class="col">
+                    <div class="placeholder-img">🏆</div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <h2>Winner — InspirIT Project Competition</h2>
+                        <p>Recognized for innovative project development and technical excellence. Led team to victory through creative problem-solving and robust implementation.</p>
+                        <p style="margin-top: 1rem; color: var(--accent-1);">Techno Main Salt Lake | 2025</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Achievement 2 -->
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <h2>Finalist — Convolution Competitive Programming</h2>
+                        <p>Competed against top programmers in challenging algorithmic problems. Demonstrated strong computational thinking and optimization skills.</p>
+                        <p style="margin-top: 1rem; color: var(--accent-2);">Jadavpur University | 2025</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="placeholder-img">💻</div>
+                </div>
+            </div>
+
+            <!-- Achievement 3 -->
+            <div class="row">
+                <div class="col">
+                    <div class="placeholder-img">🚀</div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <h2>Winner — Aminovate Hackathon</h2>
+                        <p>Developed winning solution through innovative thinking and exceptional teamwork. Created impactful technology under tight deadlines.</p>
+                        <p style="margin-top: 1rem; color: var(--accent-3);">Amity University | 2024</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Last Image -->
+            <div class="row">
+                <div class="img">
+                    <div class="placeholder-img">💼</div>
+                </div>
+            </div>
+
+            <div class="svg-path">
+                <svg width="355" height="824" viewBox="0 0 355 824" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path id="stroke-path"
+                        d="M312.962 24.5062C271.462 175.506 69.0707 79.1958 71.4619 194.506C73.326 284.403 253.017 281.914 223.962 367.006C198.654 441.125 -33.0381 629.904 37.9619 442.006C108.962 254.108 307.284 455.284 328.962 579.006C351.789 709.285 -8.0381 600.506 71.4619 799.006"
+                        stroke="url(#gradient)" stroke-width="49" stroke-linecap="round" />
+                    <defs>
+                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                            <stop offset="50%" style="stop-color:#f5576c;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#4facfe;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+        </div>
+        <div class="outro">
+            <h1>Let's Build the Future Together</h1>
+        </div>
+    </main>
+    <script src="https://unpkg.com/lenis@1.3.15/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            const lenis = new Lenis({
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                smooth: true,
+            });
+
+            lenis.on("scroll", ScrollTrigger.update);
+            gsap.ticker.add((time) => {
+                lenis.raf(time * 1000);
+            });
+            gsap.ticker.lagSmoothing(0);
+
+            const path = document.getElementById("stroke-path");
+            const pathLength = path.getTotalLength();
+
+            path.style.strokeDasharray = pathLength;
+            path.style.strokeDashoffset = pathLength;
+
+            gsap.to(path, {
+                strokeDashoffset: 0,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: ".spotlight",
+                    start: "top top",
+                    end: "bottom bottom",
+                    scrub: 1.5,
+                }
+            });
+
+            // Parallax effect for images
+            gsap.utils.toArray('.placeholder-img').forEach((img) => {
+                gsap.to(img, {
+                    y: -50,
+                    scrollTrigger: {
+                        trigger: img,
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: 1,
+                    }
+                });
+            });
+
+            // Fade in cards on scroll
+            gsap.utils.toArray('.card').forEach((card) => {
+                gsap.from(card, {
+                    opacity: 0,
+                    y: 80,
+                    duration: 1,
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top 80%",
+                        end: "top 50%",
+                        scrub: 1,
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

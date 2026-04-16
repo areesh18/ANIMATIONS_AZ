@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animations Showcase</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400&display=swap"
+        rel="stylesheet" />
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #080808;
+            --surface: #111111;
+            --surface2: #181818;
+            --border: rgba(255, 255, 255, 0.07);
+            --border-hover: rgba(255, 255, 255, 0.18);
+            --text: #f0ede8;
+            --muted: #555;
+            --accent: #c8f064;
+            --font-display: 'Syne', sans-serif;
+            --font-mono: 'DM Mono', monospace;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font-display);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* noise grain overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.35;
+        }
+
+        /* HEADER */
+        header {
+            padding: 4rem 5vw 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            top: -60px;
+            right: -80px;
+            width: 340px;
+            height: 340px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(200, 240, 100, 0.07) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1;
+            color: var(--text);
+        }
+
+        h1 span {
+            color: var(--accent);
+        }
+
+        .header-meta {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--muted);
+            text-align: right;
+            line-height: 1.8;
+        }
+
+        /* SEARCH */
+        .controls {
+            padding: 1.5rem 5vw;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .search-wrap {
+            flex: 1;
+            min-width: 240px;
+            position: relative;
+        }
+
+        .search-wrap svg {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--muted);
+            pointer-events: none;
+        }
+
+        #search {
+            width: 100%;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            padding: 10px 14px 10px 42px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        #search:focus {
+            border-color: var(--accent);
+        }
+
+        #search::placeholder {
+            color: var(--muted);
+        }
+
+        .count-badge {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--muted);
+            white-space: nowrap;
+        }
+
+        .count-badge strong {
+            color: var(--accent);
+            font-weight: 400;
+        }
+
+        /* GRID */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1px;
+            background: var(--border);
+            padding: 0;
+        }
+
+        .card {
+            background: var(--bg);
+            padding: 1.75rem 1.5rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            position: relative;
+            overflow: hidden;
+            min-height: 160px;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--accent);
+            opacity: 0;
+            transition: opacity 0.25s;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .card:hover {
+            background: var(--surface2);
+        }
+
+        .card:hover::before {
+            opacity: 0.03;
+        }
+
+        /* PREVIEW LAYERING */
+        .card-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            height: 100%;
+            position: relative;
+            z-index: 2;
+            transition: opacity 0.3s ease;
+        }
+
+        .card-preview {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background: var(--surface2);
+            overflow: hidden;
+        }
+
+        .card-preview img:not(.hover-gif) {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.15;
+            transition: opacity 0.4s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Hover States */
+        .card:hover .card-content {
+            opacity: 0;
+        }
+
+        .card-preview .hover-gif {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 1;
+            /* Fully opaque so nothing bleeds through */
+            transform: scale(1.08);
+            /* Premium zoom effect */
+        }
+
+        .card:hover .card-preview img {
+            opacity: 1;
+            transform: scale(1.08);
+        }
+
+        .card-num {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--muted);
+            letter-spacing: 0.1em;
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            color: var(--text);
+            text-transform: uppercase;
+            line-height: 1.3;
+            word-break: break-word;
+        }
+
+        .card-sub {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--muted);
+            margin-top: auto;
+        }
+
+        .card-arrow {
+            position: absolute;
+            bottom: 1.25rem;
+            right: 1.25rem;
+            font-size: 1rem;
+            color: var(--muted);
+            transition: color 0.2s, transform 0.2s;
+        }
+
+        .card:hover .card-arrow {
+            color: var(--accent);
+            transform: translate(3px, -3px);
+        }
+
+        .card.hidden {
+            display: none;
+        }
+
+        /* EMPTY STATE */
+        .empty {
+            display: none;
+            padding: 5rem 5vw;
+            text-align: center;
+            font-family: var(--font-mono);
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 2rem 5vw;
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-text {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--muted);
+        }
+
+        .footer-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="header-top">
+            <h1>Areesh<span>.</span><br>Zafar</h1>
+            <div class="header-meta">
+                HTML · CSS · JS · GSAP<br>
+                Click any card to open in new tab
+            </div>
+        </div>
+    </header>
+
+    <div class="controls">
+        <div class="search-wrap">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.35-4.35" />
+            </svg>
+            <input type="text" id="search" placeholder="Search animations..." autocomplete="off" />
+        </div>
+        <div class="count-badge">showing <strong id="count">14</strong> of 14</div>
+    </div>
+
+    <div class="grid" id="grid"></div>
+    <div class="empty" id="empty">No components match your search.</div>
+
+    <footer>
+        <div class="footer-text"><span class="footer-dot"></span>ANIMATIONS</div>
+    </footer>
+
+    <script>
+        const components = [
+            { folder: "trail_icons", label: "Trail Icons" },
+            { folder: "INTERACTIVE_TEAM_SECTION", label: "Interactive Team Section" },
+            { folder: "SVG_GSAP _ANIM", label: "SVG GSAP Animation" },
+            { folder: "ZAJNO", label: "Zayno mouse effect" },
+            { folder: "WORD_STRECTH_ZOOM", label: "Word Stretch Zoom" },
+            { folder: "Stack_scatter", label: "Stack Scatter" },
+            { folder: "SCROLL_BASED_TEXT_AND_MARQUEE", label: "Scroll Based Text & Marquee" },
+            { folder: "PRE_LOADER1", label: "Pre Loader 1" },
+            { folder: "PRE_LOADER_2(ZAYNO)", label: "Pre Loader 2" },
+            { folder: "SCROLL_PROGRESS_INDICATOR", label: "Scroll Progress Indicator" },
+            { folder: "STACK_projects_showcase", label: "Stack Projects Showcase" },
+            { folder: "stack animation", label: "Stack Animation" },
+            { folder: "CHANGE_CURSOR_ON_HOVER", label: "Change Cursor on Hover" },
+            { folder: "Horizontal_scroll", label: "Horizontal Scroll" },
+        ];
+
+        const total = components.length;
+        const grid = document.getElementById('grid');
+        const countEl = document.getElementById('count');
+        const emptyEl = document.getElementById('empty');
+
+        // Helper function to smartly fall back through different image formats
+        function setSmartImageFallback(imgElement, folder) {
+            const fallbacks = [
+                'preview.jpg',
+                'screenshot.jpg',
+                'preview.png',
+                'screenshot.png'
+            ];
+            let currentAttempt = 0;
+
+            imgElement.onerror = () => {
+                currentAttempt++;
+                if (currentAttempt < fallbacks.length) {
+                    // Try the next format in the array
+                    imgElement.src = `./${folder}/${fallbacks[currentAttempt]}`;
+                } else {
+                    // If all fail, hide the broken image icon completely
+                    imgElement.style.display = 'none';
+                }
+            };
+
+            // Kick off the first attempt
+            imgElement.src = `./${folder}/${fallbacks[0]}`;
+        }
+
+        function buildGrid() {
+            grid.innerHTML = '';
+            components.forEach((c, i) => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.dataset.index = i;
+
+                card.innerHTML = `
+                <div class="card-preview">
+                    <img loading="lazy" alt="${c.label}" />
+                </div>
+                <div class="card-content">
+                    <div class="card-num">${String(i + 1).padStart(2, '0')}</div>
+                    <div class="card-title">${c.label}</div>
+                    <div class="card-sub">${c.folder}/index.html</div>
+                    <span class="card-arrow">↗</span>
+                </div>
+            `;
+
+                // Apply the smart fallback to the newly created image tag
+                const staticImg = card.querySelector('.card-preview img');
+                setSmartImageFallback(staticImg, c.folder);
+
+                // Open in new tab on click
+                card.addEventListener('click', () => {
+                    window.open(`./${c.folder}/index.html`, '_blank');
+                });
+
+                const previewContainer = card.querySelector('.card-preview');
+
+                // Dynamically create and layer GIF on hover
+                card.addEventListener('mouseenter', () => {
+                    const gif = document.createElement('img');
+                    gif.src = `./${c.folder}/preview.gif`;
+                    gif.className = 'hover-gif';
+                    gif.style.position = 'absolute';
+                    gif.style.inset = '0';
+                    gif.style.zIndex = '2';
+                    // If no GIF exists, remove it seamlessly so the static image remains
+                    gif.onerror = () => gif.remove();
+                    previewContainer.appendChild(gif);
+                });
+
+                // Destroy the GIF on mouse leave to free up memory
+                card.addEventListener('mouseleave', () => {
+                    const gif = previewContainer.querySelector('.hover-gif');
+                    if (gif) gif.remove();
+                });
+
+                grid.appendChild(card);
+            });
+        }
+
+        document.getElementById('search').addEventListener('input', function () {
+            const q = this.value.trim().toLowerCase();
+            let visible = 0;
+            document.querySelectorAll('.card').forEach((card, i) => {
+                const c = components[i];
+                const matches = !q || c.label.toLowerCase().includes(q) || c.folder.toLowerCase().includes(q);
+                card.classList.toggle('hidden', !matches);
+                if (matches) visible++;
+            });
+            countEl.textContent = visible;
+            emptyEl.style.display = visible === 0 ? 'block' : 'none';
+            grid.style.display = visible === 0 ? 'none' : 'grid';
+        });
+
+        buildGrid();
+        countEl.textContent = total;
+    </script>
+</body>
+
+</html>

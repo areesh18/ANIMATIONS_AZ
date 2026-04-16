@@ -1,0 +1,54 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: #161616;
+}
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+.content p {
+  color: red;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: 100px;
+  font-weight: 200;
+}
+::-webkit-scrollbar{
+  display: none;
+}
+.hero2{
+  width: 100vw;
+  height: 100vh;
+  background-color: red;
+}
+/* .counter h1{
+    position: absolute;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: lighter;
+    color: white !important;
+    margin: 20px;
+} */
+
+.percent{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.2);
+    height: 140px;
+    width: 1px;
+    top: 50%;
+    right: 1%;
+    transform: translateY(-50%);
+    
+}
+.fill{
+    position: absolute;
+/*     background-color: blue;
+ */    width: 100%;
+    height: 100%;
+    bottom: 0;
+    transition: background 0.15s ease;
+}

@@ -1,0 +1,128 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Geist+Mono:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* hiding scroll-bar */
+::-webkit-scrollbar {
+  display: none;
+}
+body {
+  font-family: "Barlow Condensed";
+  background-color: #0f0f0f;
+  color: #fff;
+}
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.container {
+  position: relative;
+  width: 100%;
+  height: 600vh;
+}
+
+.hero {
+  position: sticky;/*pehle fixed tha*/
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100svh;
+  overflow: hidden;
+}
+.about-copy {
+  position: absolute;
+  left: 0;
+  top: 50%;
+/*   background-color: red;
+ */  transform: translateY(-50%);
+  width: 100%;padding: 2rem;
+  display: flex;
+  gap: 4rem;
+}
+.copy-block{
+/*   background-color: green;
+ */  flex: 1;
+}
+.copy-block p{
+  font-size: 1.4rem;
+  font-weight: 450;
+  letter-spacing: -0.025rem;
+  line-height: 1.2;
+}
+.copy-block p .word{
+  will-change: transform;
+}
+.scroll-indicator{
+  background-color: #2f2f2f;
+  position: absolute;
+  width: 10rem;
+  height: 0.1rem;
+  top: 2rem;
+  right: 2rem;
+}
+.scroll-indicator::after{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  transform-origin: left;
+  transform: scale(var(--progress,0));
+  will-change: transform;
+
+}
+
+.marquee{
+  position: absolute;
+  left: 0;
+  bottom:2rem;
+  width: 100%;
+  height: 7.5rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+
+}
+.marquee-track{
+  display: flex;
+  gap: 0.75rem;
+  will-change: transform;
+}
+.marquee-item{
+  width: 10rem;
+  height: 6rem;
+  border-radius: 0.25rem;
+  overflow: hidden;
+
+}
+.hero2{
+  background-color: rgb(231, 231, 231);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero2 h1{
+  font-size: 50px;
+  text-transform: uppercase;
+  color: black;
+}
+@media(max-width:1000px){
+  nav{
+    flex-direction: column;
+  }
+  .about-copy{
+    top: 20rem;
+    flex-direction: column;
+  }
+  .copy-block p{
+    font-size: 1.25rem;
+  }
+}

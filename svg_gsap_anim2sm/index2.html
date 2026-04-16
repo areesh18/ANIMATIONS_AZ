@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Education & Achievements</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0f172a, #020617);
+      color: #e5e7eb;
+    }
+
+    /* PAGE */
+    .profile-page {
+      min-height: 100vh;
+      padding: 4rem 6vw;
+      display: flex;
+      align-items: center;
+    }
+
+    /* GRID */
+    .content-wrapper {
+      width: 100%;
+      max-width: 1100px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
+    }
+
+    /* CARD */
+    .card {
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 18px;
+      padding: 2.5rem;
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+    }
+
+    /* TITLES */
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    /* EDUCATION */
+    .item h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .meta {
+      font-size: 0.9rem;
+      opacity: 0.75;
+      margin: 0.35rem 0 0.7rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.35rem 0.9rem;
+      font-size: 0.8rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #6366f1, #22d3ee);
+      color: #020617;
+      font-weight: 600;
+    }
+
+    .divider {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.1);
+      margin: 1.6rem 0;
+    }
+
+    /* ACHIEVEMENTS */
+    .achievement-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .achievement-list li {
+      display: flex;
+      gap: 0.9rem;
+      align-items: flex-start;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      background: #22d3ee;
+      border-radius: 50%;
+      margin-top: 7px;
+      flex-shrink: 0;
+    }
+
+    .achievement-list p {
+      font-size: 0.95rem;
+      line-height: 1.45;
+    }
+
+    .achievement-list span {
+      opacity: 0.65;
+      margin-left: 6px;
+    }
+
+    .muted {
+      opacity: 0.45;
+    }
+
+    .muted .dot {
+      background: #64748b;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .profile-page {
+        padding: 3rem 1.5rem;
+      }
+
+      .card {
+        padding: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <section class="profile-page">
+    <div class="content-wrapper">
+
+      <!-- EDUCATION -->
+      <div class="card">
+        <h2 class="section-title">🎓 Education</h2>
+
+        <div class="item">
+          <h3>B.Tech in Information Technology</h3>
+          <p class="meta">Techno Main Salt Lake, Kolkata · 2025</p>
+          <span class="badge">CGPA: 8.16</span>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="item">
+          <h3>ISC (Class XII)</h3>
+          <p class="meta">CISCE · 2022</p>
+          <span class="badge">95.75%</span>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="item">
+          <h3>ICSE (Class X)</h3>
+          <p class="meta">CISCE · 2020</p>
+          <span class="badge">95.2%</span>
+        </div>
+      </div>
+
+      <!-- ACHIEVEMENTS -->
+      <div class="card">
+        <h2 class="section-title">🏆 Achievements</h2>
+
+        <ul class="achievement-list">
+          <li>
+            <span class="dot"></span>
+            <p><strong>Winner</strong> — Project Competition, InspirIT, TMSL <span>2025</span></p>
+          </li>
+          <li>
+            <span class="dot"></span>
+            <p><strong>Finalist</strong> — Convolution Competitive Programming, Jadavpur University <span>2025</span></p>
+          </li>
+          <li>
+            <span class="dot"></span>
+            <p><strong>Winner</strong> — Aminovate Hackathon, Amity University <span>2024</span></p>
+          </li>
+          <li class="muted">
+            <span class="dot"></span>
+            <p>More achievements can be added here</p>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+</body>
+</html>

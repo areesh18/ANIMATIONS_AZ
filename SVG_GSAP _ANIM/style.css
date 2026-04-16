@@ -1,0 +1,152 @@
+@import url("https://fonts.googleapis.com/css2?family=Bentham&family=Manrope:wght@200..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+:root{
+    --base-100: #fafaf0;
+    --base-200: #deded5;
+    --base-300: #0f0f0f;
+}
+body{
+    font-family: "Manrope";
+    background-color: var(--base-100);
+    color: var(--base-300);
+}
+
+h1,h2{
+    font-weight: 500;
+    line-height: 1.1;
+}
+
+h1{
+    font-size: 2rem;
+    letter-spacing: -0.1rem;
+}
+
+h2{
+    font-size: 1rem;
+    letter-spacing: -0.075rem;
+}
+p{
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.hero, .outro{
+    position: relative;
+    width: 100%;
+    height: 100svh;
+    padding: 1rem;
+    background-color: var(--base-200);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hero h1, .outro h1{
+    width: 60%;
+    text-align: center;
+}
+
+.spotlight{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 10rem;
+    overflow: hidden;
+}
+
+.spotlight .row{
+    display: flex;
+    justify-content: center;
+    gap: 0.7rem;
+}
+
+.spotlight .row .col{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.spotlight .row:nth-child(1) .img,
+.spotlight .row:nth-child(4) .img{
+    width: 50%;
+}
+
+.spotlight .card{
+    background-color: var(--base-200);
+    width: 75%;
+    margin: 0 auto;
+    padding: 0.8rem;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+}
+
+.spotlight .svg-path{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: 100%;
+    z-index: -1;
+}
+.spotlight .svg-path svg{
+    height: auto;
+    width: 100%;
+}
+
+@media (max-width: 1000px) {
+    h1,h2{
+        letter-spacing: 0;
+    }
+    h1{
+        font-size: 1.5rem;
+    }
+    h2{
+        font-size: 1rem;
+    }
+    p{
+        font-size: 0.75rem;
+    }
+    .hero h1, .outro h1{
+        width: 100%;
+    }
+    .spotlight{
+        gap: 3rem;
+    }
+    .spotlight .row{
+        flex-direction: column;
+    }
+
+    .spotlight .row:nth-child(1) .img,
+    .spotlight .row:nth-child(4) .img{
+        width: 100%;
+
+    }
+    .spotlight .card{
+        width: 100%;;
+    }
+
+    .spotlight .svg-path{
+        top: 15svh;
+        width: 160%;
+    }
+}
+
