@@ -363,12 +363,12 @@
             { folder: "trail_icons", label: "Trail Icons" },
             { folder: "INTERACTIVE_TEAM_SECTION", label: "Interactive Team Section" },
             { folder: "SVG_GSAP _ANIM", label: "SVG GSAP Animation" },
-            { folder: "ZAJNO", label: "Zayno mouse effect" },
+            { folder: "ZAJNO", label: "Zajno" },
             { folder: "WORD_STRECTH_ZOOM", label: "Word Stretch Zoom" },
             { folder: "Stack_scatter", label: "Stack Scatter" },
             { folder: "SCROLL_BASED_TEXT_AND_MARQUEE", label: "Scroll Based Text & Marquee" },
             { folder: "PRE_LOADER1", label: "Pre Loader 1" },
-            { folder: "PRE_LOADER_2(ZAYNO)", label: "Pre Loader 2" },
+            { folder: "PRE_LOADER_2(ZAYNO)", label: "Pre Loader 2 (Zayno)" },
             { folder: "SCROLL_PROGRESS_INDICATOR", label: "Scroll Progress Indicator" },
             { folder: "STACK_projects_showcase", label: "Stack Projects Showcase" },
             { folder: "stack animation", label: "Stack Animation" },
@@ -381,31 +381,6 @@
         const countEl = document.getElementById('count');
         const emptyEl = document.getElementById('empty');
 
-        // Helper function to smartly fall back through different image formats
-        function setSmartImageFallback(imgElement, folder) {
-            const fallbacks = [
-                'preview.jpg',
-                'screenshot.jpg',
-                'preview.png',
-                'screenshot.png'
-            ];
-            let currentAttempt = 0;
-
-            imgElement.onerror = () => {
-                currentAttempt++;
-                if (currentAttempt < fallbacks.length) {
-                    // Try the next format in the array
-                    imgElement.src = `./${folder}/${fallbacks[currentAttempt]}`;
-                } else {
-                    // If all fail, hide the broken image icon completely
-                    imgElement.style.display = 'none';
-                }
-            };
-
-            // Kick off the first attempt
-            imgElement.src = `./${folder}/${fallbacks[0]}`;
-        }
-
         function buildGrid() {
             grid.innerHTML = '';
             components.forEach((c, i) => {
@@ -413,9 +388,10 @@
                 card.className = 'card';
                 card.dataset.index = i;
 
+                // Hardcoded to strictly look for preview.png. Hides cleanly if missing.
                 card.innerHTML = `
                 <div class="card-preview">
-                    <img loading="lazy" alt="${c.label}" />
+                    <img src="./${c.folder}/preview.png" loading="lazy" alt="${c.label}" onerror="this.style.display='none'" />
                 </div>
                 <div class="card-content">
                     <div class="card-num">${String(i + 1).padStart(2, '0')}</div>
@@ -424,10 +400,6 @@
                     <span class="card-arrow">↗</span>
                 </div>
             `;
-
-                // Apply the smart fallback to the newly created image tag
-                const staticImg = card.querySelector('.card-preview img');
-                setSmartImageFallback(staticImg, c.folder);
 
                 // Open in new tab on click
                 card.addEventListener('click', () => {
