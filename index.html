@@ -388,10 +388,10 @@
                 card.className = 'card';
                 card.dataset.index = i;
 
-                // Hardcoded to strictly look for preview.png. Hides cleanly if missing.
+                // Updated to strictly look for preview.webp
                 card.innerHTML = `
                 <div class="card-preview">
-                    <img src="./${c.folder}/preview.png" loading="lazy" alt="${c.label}" onerror="this.style.display='none'" />
+                    <img src="./${c.folder}/preview.webp" loading="lazy" alt="${c.label}" onerror="this.style.display='none'" />
                 </div>
                 <div class="card-content">
                     <div class="card-num">${String(i + 1).padStart(2, '0')}</div>
